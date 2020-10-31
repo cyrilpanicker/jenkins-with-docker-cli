@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  jenkins:
+    image: jenkins-with-docker-cli
+    build: .
+    group_add:
+      - ${DOCKER_SOCK_GROUP_ID}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./jenkins_home:/var/jenkins_home
+    ports:
+      - 9090:8080
+      - 50000:50000
